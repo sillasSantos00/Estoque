@@ -1,13 +1,12 @@
 package org.example;
 
 import org.example.ConnectionFactory.ConnectionFactory;
-import org.example.insert.insert1;// Importe Insert1
+import org.example.insert.insert1; // Importe Insert1
 
-import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import static org.example.insert.insert1.inserir;
 
 public class Main {
 
@@ -39,7 +38,8 @@ public class Main {
     }
 
     private static void inserirProduto(Scanner scanner) {
-        try (Connection conexao = ConnectionFactory.getConnection();) {
+        try (Connection conexao = ConnectionFactory.getConnection()) {
+
             System.out.print("Nome do produto: ");
             String nome = scanner.nextLine();
             System.out.print("Descrição do produto: ");
@@ -49,12 +49,15 @@ public class Main {
             System.out.print("Quantidade do produto: ");
             int quantidade = scanner.nextInt();
             scanner.nextLine(); // Limpar o buffer
-            scanner.nextLine();
 
-            insert1.inserir(conexao, nome, descricao, quantidade, preco); // Use Insert1
+            insert1.inserir(conexao, nome, descricao, quantidade, preco);
 
-        }catch (SQLException0 e) {
+        } catch (SQLException e) {
             System.out.println("Erro ao inserir produto: " + e.getMessage());
+            e.printStackTrace();
+        } catch (InputMismatchException e) {
+            System.out.println("Erro: Entrada inválida. Insira um número.");
+            e.printStackTrace();
         }
     }
 }
