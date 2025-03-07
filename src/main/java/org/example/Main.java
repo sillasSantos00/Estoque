@@ -2,9 +2,11 @@ package org.example;
 
 import org.example.ConnectionFactory.ConnectionFactory;
 import org.example.insert.insert1; // Importe Insert1
+import org.example.select1.select1;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ public class Main {
         do {
             System.out.println("Escolha uma opção:");
             System.out.println("1 - Inserir produto");
+            System.out.println("2 - Listar produtos");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
             opcao = scanner.nextInt();
@@ -25,6 +28,9 @@ public class Main {
             switch (opcao) {
                 case 1:
                     inserirProduto(scanner);
+                    break;
+                case 2:
+                    listarprodutos(scanner);
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -57,6 +63,14 @@ public class Main {
             e.printStackTrace();
         } catch (InputMismatchException e) {
             System.out.println("Erro: Entrada inválida. Insira um número.");
+            e.printStackTrace();
+        }
+    }
+    private static void listarprodutos(Scanner scanner) {
+        try (Connection conexao  = ConnectionFactory.getConnection()) {
+            select1.listar(conexao);
+        }catch (SQLException e) {
+            System.out.println("erro ao listar produtos" + e.getMessage());
             e.printStackTrace();
         }
     }
