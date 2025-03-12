@@ -20,6 +20,9 @@ public class insert1  {
                 System.out.println("PRODUTO INSERIDO COM SUCESSO");
             } else {
                 System.out.println("ERRO AO INSERIR O PRODUTO");
+
+
+
             }
         }
     }

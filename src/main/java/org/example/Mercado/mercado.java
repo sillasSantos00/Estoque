@@ -5,6 +5,11 @@ public class mercado {
     private int quantidade;
     private String descricao;
     private int preco;
+    private int senha;
+
+    public mercado(int senha) {
+        this.senha = 123;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -30,11 +35,12 @@ public class mercado {
         this.quantidade = quantidade;
     }
 
-    public mercado(String nome, int quantidade, String descricao, int preco) {
+    public mercado(String nome, int quantidade, String descricao, int preco, int senha) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.descricao = descricao;
         this.preco = preco;
+        this.senha = senha;
     }
 
     public String getNome() {
